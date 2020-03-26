@@ -1,0 +1,13 @@
+{
+  "name": "Test Extension",
+  "description" : "Testing",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "test-action.html",
+    "default_icon": "test-action.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "test-new-tab.html"
+  }
+}
