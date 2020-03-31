@@ -13,6 +13,7 @@ jobs:
       - run:
           name: Deploy to beta (test Web Store account)
           command: |
+            npm run test
             npm run bump
             npm run deploy
 
