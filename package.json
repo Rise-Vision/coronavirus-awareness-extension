@@ -5,12 +5,8 @@
   "scripts": {
     "build": "cd src && zip -r package * && mv package.zip ..",
     "predeploy": "npm run build",
-<<<<<<< HEAD
-    "deploy": "node deploy.js -ip"
-=======
     "deploy": "node deploy.js -p",
     "bump": "node deploy.js -i"
->>>>>>> c30ddd8... Bump before deploy
   },
   "repository": {
     "type": "git",
