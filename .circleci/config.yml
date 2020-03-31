@@ -12,7 +12,9 @@ jobs:
       - run: npm install
       - run:
           name: Deploy to beta (test Web Store account)
-          command: npm run deploy
+          command: |
+            npm run bump
+            npm run deploy
 
 workflows:
   version: 2
