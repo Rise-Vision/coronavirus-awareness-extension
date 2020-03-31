@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Do the five! Stop the spread of the coronavirus every time you open a new tab.",
   "scripts": {
+    "test": "eslint src",
     "build": "cd src && zip -r package * && mv package.zip ..",
     "predeploy": "npm run build",
     "deploy": "node deploy.js -p",
@@ -18,6 +19,27 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
-    "commander": "^5.0.0"
+    "commander": "^5.0.0",
+    "eslint": "^6.8.0"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "*.min.js"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2019
+    },
+    "globals": {
+      "chrome": false,
+      "analytics": false
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "prefer-arrow-callback": "error",
+      "indent": [
+        "error",
+        2
+      ]
+    }
   }
 }
