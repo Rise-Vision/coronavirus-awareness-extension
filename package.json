@@ -1,11 +1,11 @@
 {
-  "name": "Coronavirus Tips New Tab",
-  "version": "1.0",
+  "name": "coronavirus-tips-new-tab",
+  "version": "1.0.0",
   "description": "Do the five! Stop the spread of the coronavirus every time you open a new tab.",
   "scripts": {
     "build": "cd src && zip -r package * && mv package.zip ..",
     "predeploy": "npm run build",
-    "deploy": "node deploy.js -p"
+    "deploy": "node deploy.js -ip"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "license": "GPL-3.0",
   "engines": {
     "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "commander": "^5.0.0"
   }
 }

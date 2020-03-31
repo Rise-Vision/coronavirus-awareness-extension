@@ -6,7 +6,7 @@ const fs = require("fs");
 const spawnSync = require("child_process").spawnSync;
 
 function utf8() {return {encoding: "utf8"};}
-const manifestFilePath = "manifest.json";
+const manifestFilePath = "src/manifest.json";
 
 program
   .version('0.0.1')
@@ -38,14 +38,12 @@ function incrementVersion() {
 }
 
 function publish() {
-  const credentialsPath = "private-keys/chrome-os-player/credentials.json";
+  const credentialsPath = "private-keys/coronavirus-tips/credentials.json";
   const credentials = JSON.parse(fs.readFileSync(credentialsPath, utf8()));
 
-  // Overwrite appIds as follows for rollout. Put app.zip from CCI artifact after build/stable build into dist/
-  // Primary: mfpgpdablffhbfofnhlpgmokokbahooi
-  // Secondary: ilcmohdkjfcfekfmpdppgoaaemgdmhaa
-  const appId = "mfpgpdablffhbfofnhlpgmahooi";
-   // (process.env.NODE_ENV === 'production') ? credentials.production_app_id : credentials.beta_app_id;
+  // const appId = "konbgoghafhpdebefnmcbbmbgoakjfkp"; //Rise Vision Developer
+  const appId = "onfcnahfkomboddiolhdplplkieeheen"; // Rise Vision Chrome Web Store - Test
+  // (process.env.NODE_ENV === 'production') ? credentials.production_app_id : credentials.beta_app_id;
 
   const accessTokenRequest = spawnSync("curl", ["--data",
   "client_id=" + credentials.client_id +
@@ -53,6 +51,11 @@ function publish() {
   "&refresh_token=" + credentials.refresh_token +
   "&grant_type=refresh_token",
   "https://www.googleapis.com/oauth2/v4/token"], utf8());
+
+  console.log(accessTokenRequest.stdout.toString());
+  if (["FAILURE", "error"].some(el=>accessTokenRequest.stdout.toString().includes(el))) {
+    process.exit(1);
+  }
 
   const accessToken = JSON.parse(accessTokenRequest.stdout).access_token;
 
@@ -66,10 +69,9 @@ function publish() {
   "-vv",
   "https://www.googleapis.com/upload/chromewebstore/v1.1/items/" + appId]);
 
-  console.log(JSON.parse(chromeWebStoreUploadRequest.stdout.toString()).uploadState);
+  console.log(chromeWebStoreUploadRequest.stdout.toString());
 
-  if (chromeWebStoreUploadRequest.stdout.toString().indexOf("FAILURE") > -1) {
-    console.log(chromeWebStoreUploadRequest.stdout.toString());
+  if (["FAILURE", "error"].some(el=>chromeWebStoreUploadRequest.stdout.toString().includes(el))) {
     process.exit(1);
   }
 
@@ -87,6 +89,5 @@ function publish() {
   "https://www.googleapis.com/chromewebstore/v1.1/items/" + appId + "/publish"]);
 
   console.log(chromeWebStorePublishRequest.stdout.toString());
-
   process.exit(chromeWebStorePublishRequest.status);
 }
