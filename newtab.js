@@ -1,0 +1,1 @@
+analytics.track("New tab", {test: "test"});
