@@ -5,6 +5,7 @@
   "manifest_version": 2,
   "browser_action": {
     "default_icon": {
+<<<<<<< HEAD
       "16": "images/icon16.png",
       "24": "images/icon24.png",
       "32": "images/icon32.png"
@@ -14,6 +15,23 @@
     "16": "images/icon-with-padding-16.png",
     "48": "images/icon-with-padding-48.png",
     "128": "images/icon-with-padding-128.png"
+=======
+            "16": "images/icon16.png",
+            "24": "images/icon24.png",
+            "32": "images/icon32.png"
+          }
+  },
+  "icons": {
+     "16": "images/icon16.png",
+     "24": "images/icon24.png",
+     "32": "images/icon32.png",
+     "48": "images/icon48.png",
+     "128": "images/icon128.png"
+  },
+  "background": {
+     "page": "background.html",
+     "persistent": false
+>>>>>>> 205c9ce... moved source under /src
   },
   "chrome_url_overrides": {
     "newtab": "newtab.html"
