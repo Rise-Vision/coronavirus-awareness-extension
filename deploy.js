@@ -78,16 +78,20 @@ function publish() {
   const manifest = JSON.parse(fs.readFileSync(manifestFilePath, {encoding: "utf8"}));
   console.log("Publishing version " + manifest.version);
 
+  // https://developer.chrome.com/webstore/webstore_api/items/publish
   const chromeWebStorePublishRequest = spawnSync("curl", [
   "-H", "Authorization: Bearer " + accessToken,
   "-H", "x-goog-api-verison: 2",
   "-H", "Content-Length: 0",
-  "-H", "publishTarget: trustedTesters",
   "-X", "POST",
   "-vv",
   "-fail",
   "https://www.googleapis.com/chromewebstore/v1.1/items/" + appId + "/publish"]);
 
   console.log(chromeWebStorePublishRequest.stdout.toString());
+  if (["FAILURE", "error"].some(el=>chromeWebStorePublishRequest.stdout.toString().includes(el))) {
+    process.exit(1);
+  }
+
   process.exit(chromeWebStorePublishRequest.status);
 }
