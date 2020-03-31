@@ -1,0 +1,22 @@
+{
+  "name": "coronavirus-tips-new-tab",
+  "version": "1.0.0",
+  "description": "Do the five! Stop the spread of the coronavirus every time you open a new tab.",
+  "scripts": {
+    "build": "cd src && zip -r package * && mv package.zip ..",
+    "predeploy": "npm run build",
+    "deploy": "node deploy.js -ip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rise-Vision/coronavirus-awareness-extension"
+  },
+  "author": "Rise Vision",
+  "license": "GPL-3.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "commander": "^5.0.0"
+  }
+}
