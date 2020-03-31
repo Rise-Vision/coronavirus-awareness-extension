@@ -2,7 +2,8 @@ version: 2
 
 jobs:
   "deploy_beta":
-    docker: *DOCKERIMAGE
+    docker: &DOCKERIMAGE
+      - image: jenkinsrise/cci-latest-node-with-gcloud:0.0.1
     steps:
       - checkout
       - attach_workspace:
