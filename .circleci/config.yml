@@ -23,6 +23,7 @@ jobs:
       - run:
           name: Set staging url for content
           command: npm run set-staging-content
+          command: npm run set-staging-segment-key
       - run:
           name: Deploy to beta (test Web Store account)
           command: |
