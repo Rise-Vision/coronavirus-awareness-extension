@@ -32,8 +32,6 @@ jobs:
 
   "deploy_prod":
     docker: *DOCKERIMAGE
-    environment:
-      NODE_ENV: prod
     steps:
       - checkout
       - attach_workspace:
@@ -42,6 +40,8 @@ jobs:
       - run: npm install
       - run:
           name: Deploy to production
+          environment:
+            NODE_ENV: prod
           command: |
             npm run test
             npm run bump
@@ -66,3 +66,6 @@ workflows:
             tags:
               only:
                 - production
+            branches:
+              ignore:
+                - /.*/
