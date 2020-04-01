@@ -52,7 +52,6 @@ function publish() {
   "&grant_type=refresh_token",
   "https://www.googleapis.com/oauth2/v4/token"], utf8());
 
-  console.log(accessTokenRequest.stdout.toString());
   if (["FAILURE", "error"].some(el=>accessTokenRequest.stdout.toString().includes(el))) {
     process.exit(1);
   }
