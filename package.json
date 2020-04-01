@@ -26,7 +26,8 @@
   },
   "eslintConfig": {
     "ignorePatterns": [
-      "*.min.js"
+      "*.min.js",
+      "analytics.js"
     ],
     "parserOptions": {
       "ecmaVersion": 2019

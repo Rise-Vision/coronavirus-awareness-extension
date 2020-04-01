@@ -5,3 +5,5 @@ chrome.runtime.onInstalled.addListener(details=>{
 chrome.runtime.onStartup.addListener(()=>{
   analytics.track("Startup", {version: chrome.app.getDetails().version});
 });
+
+chrome.browserAction.onClicked.addListener(()=>chrome.tabs.create({}));
