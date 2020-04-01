@@ -1,9 +1,19 @@
 version: 2
 
 jobs:
-  "deploy_beta":
+  "test":
     docker: &DOCKERIMAGE
       - image: jenkinsrise/cci-latest-node-with-gcloud:0.0.1
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: Unit Testing
+          command: |
+            npm run test
+
+  "deploy_beta":
+    docker: *DOCKERIMAGE
     steps:
       - checkout
       - attach_workspace:
@@ -19,10 +29,12 @@ jobs:
 
 workflows:
   version: 2
-  deploy:
+  test_and_deploy:
     jobs:
+      - "test"
       - "deploy_beta":
           requires:
+            - test
           filters:
             branches:
               only:
