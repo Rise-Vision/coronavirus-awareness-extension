@@ -30,6 +30,23 @@ jobs:
             npm run bump
             npm run deploy
 
+  "deploy_prod":
+    docker: *DOCKERIMAGE
+    environment:
+      NODE_ENV: prod
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: git clone git@github.com:Rise-Vision/private-keys.git
+      - run: npm install
+      - run:
+          name: Deploy to production
+          command: |
+            npm run test
+            npm run bump
+            npm run deploy
+
 workflows:
   version: 2
   test_and_deploy:
@@ -42,3 +59,10 @@ workflows:
             branches:
               only:
                 - master
+      - "deploy_prod":
+          requires:
+            - test
+          filters:
+            tags:
+              only:
+                - production

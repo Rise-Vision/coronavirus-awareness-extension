@@ -41,9 +41,9 @@ function publish() {
   const credentialsPath = "private-keys/coronavirus-tips/credentials.json";
   const credentials = JSON.parse(fs.readFileSync(credentialsPath, utf8()));
 
-  // const appId = "konbgoghafhpdebefnmcbbmbgoakjfkp"; //Rise Vision Developer
-  const appId = "onfcnahfkomboddiolhdplplkieeheen"; // Rise Vision Chrome Web Store - Test
-  // (process.env.NODE_ENV === 'production') ? credentials.production_app_id : credentials.beta_app_id;
+  const betaAppId = "onfcnahfkomboddiolhdplplkieeheen"; // Rise Vision Chrome Web Store - Test
+  const prodAppId = "konbgoghafhpdebefnmcbbmbgoakjfkp"; // Rise Vision Developer
+  const appId = process.env.NODE_ENV === 'production' ? prodAppId : betaAppId;
 
   const accessTokenRequest = spawnSync("curl", ["--data",
   "client_id=" + credentials.client_id +
