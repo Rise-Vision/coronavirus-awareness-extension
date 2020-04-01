@@ -21,6 +21,9 @@ jobs:
       - run: git clone git@github.com:Rise-Vision/private-keys.git
       - run: npm install
       - run:
+          name: Set staging url for content
+          command: npm run set-staging-content
+      - run:
           name: Deploy to beta (test Web Store account)
           command: |
             npm run test
