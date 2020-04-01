@@ -1,9 +1,7 @@
-chrome.runtime.onInstalled.addListener(details=>{
-  analytics.track("Install", {reason: details.reason});
+chrome.runtime.onInstalled.addListener(function(details) {
+   	analytics.track("Install", {reason: details.reason, version: chrome.app.getDetails().version});
 });
 
-chrome.runtime.onStartup.addListener(()=>{
-  analytics.track("Startup", {test: "test"});
+chrome.runtime.onStartup.addListener(function() {
+	analytics.track("Startup", {version: chrome.app.getDetails().version});
 });
-
-chrome.browserAction.onClicked.addListener(()=>chrome.tabs.create({}));
