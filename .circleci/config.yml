@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 jobs:
   "test":
@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Deploy to production
           environment:
-            NODE_ENV: prod
+            NODE_ENV: production
           command: |
             npm run test
             npm run bump
@@ -53,21 +53,21 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - "test"
+      - "test":
+          filters:
+            tags:
+              only: /.*/
       - "deploy_beta":
           requires:
             - test
           filters:
             branches:
-              only:
-                - master
+              only: master
       - "deploy_prod":
           requires:
             - test
           filters:
             tags:
-              only:
-                - production
+              only: production
             branches:
-              ignore:
-                - /.*/
+              ignore: /.*/
